@@ -1,0 +1,390 @@
+body {
+    font-family: 'Proxima Nova', Georgia, sans-serif;
+    background-color: #1b2b38;
+    color: white;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(50% 50% at 50% 50%, #151b2e 0, rgba(21, 27, 46, 0) 100%);
+    position: relative;
+}
+
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: italic;
+    font-family: 'proxima_nova_altbold', Georgia, sans-serif;
+    font-size: 22px;
+    line-height: 0.1;
+}
+
+.logo-container {
+    width: 50px;
+    /* Set the desired width */
+    height: 50px;
+    /* Set the desired height */
+    display: inline-block;
+}
+
+.grid-container {
+    display: grid;
+    grid-gap: 10px 2px;
+    padding: 3px 3px 4px;
+    width: 100%;
+    max-width: 400px;
+    height: 409.5;
+    grid-template-columns: repeat(5, auto);
+    background-color: #0e212e;
+    border-radius: 16px;
+    padding: 12px 8px 20px;
+    justify-items: center;
+    align-items: center;
+}
+
+.grid-tile {
+    width: 64px;
+    height: 64px;
+    background: #2f4553;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.3em #213743;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.5s ease;
+    animation-duration: 300ms;
+    animation-timing-function: cubic-bezier(.87, -.41, .19, 1.44);
+}
+
+.revealed-tile {
+    background-color: #061824;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+}
+
+.revealed-tile svg {
+    width: 50px; /* Adjust the size of the SVG to make it smaller */
+    height: 50px;
+    /* animation: diamondReveal 600ms ease-in-out;
+    animation-delay: 400ms; /* Delay to ensure the diamond reveals after the tile animation 
+    transform-origin: center; */
+}
+
+@keyframes tileReveal {
+    0% {
+        transform: scale(1); /* Start at normal size */
+    }
+    40% {
+        transform: scale(1.07); /* Enlarge by 15% */
+    }
+    80% {
+        transform: scale(0.7); /* Shrink down to 70% */
+    }
+    100% {
+        transform: scale(1); /* Back to normal size, green diamond fully revealed */
+    }
+}
+
+.grid-tile.revealed {
+    animation: tileReveal 800ms cubic-bezier(.87,-.41,.19,1.44);
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
+    background: #151b2e;
+    border-radius: 1rem;
+    gap: 15px;
+    padding: 0.5rem 1rem;
+}
+
+.trap-selector {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(10 15 30 / 1);
+    border-radius: 10px;
+    padding: 5px 10px;
+    width: 100%;
+}
+
+.trap-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #8e93b8;
+    transition: color 0.3s;
+}
+
+.trap-button:hover {
+    color: #c0c5e0;
+}
+
+.trap-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #b0b5d6;
+}
+
+.trap-number {
+    font-size: 16px;
+    color: white;
+}
+
+.trap-label {
+    font-size: 12px;
+    color: #b0b5d6;
+}
+
+#play-button {
+    width: 100%;
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px; /* Small rounding for 'rounded-sm' */
+    font-weight: 600; /* 'font-semibold' */
+    transition: background-color 0.2s, color 0.2s, transform 0.2s ease;
+    background-color: #00e701; /* 'bg-green-500' */
+    color: black; /* 'text-neutral-black' */
+    font-size: 16px; /* 'text-base' */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 'shadow-md' */
+    padding: 1.125rem 1.75rem;
+    border: none
+}
+
+/* Hover effect */
+#play-button:hover {
+    background-color: #00d400; /* Slightly darker green for hover */
+    transform: translateY(-3px); /* Slightly elevate the button on hover */
+}
+
+/* Active effect */
+#play-button:active {
+    transform: scale(0.98); /* Slightly shrink the button when clicked */
+    background-color: #00c300; /* Darker green for the active state */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15); /* Reduced shadow on active */
+}
+
+.newgame-container {
+    margin-top: 10px;
+}
+
+.newgame {
+    padding: 12px 20px;
+    background: linear-gradient(93.73deg, #108de7, #0855c4);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: white;
+}
+
+/* Keyframes for fade-in and fade-out animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+}
+
+/* Modal styles */
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #061824;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content.show {
+    animation: fadeIn 0.3s forwards;
+}
+
+.modal.hide {
+    animation: fadeOut 0.3s forwards;
+}
+
+.modal-content {
+    display: flex;
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-direction: column;
+    background-color: #304652;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #2c3345;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: white;
+    transition: opacity 0.3s ease;
+}
+
+.modal-logo {
+    width: 80%;
+}
+
+.modal-logo img {
+    width: 40%;
+    border-radius: 15px;
+}
+
+.modal-title {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    margin: 0;
+}
+
+.modal-title span {
+    line-height: 1;
+}
+
+#userIdInput {
+    padding: 10px;
+    width: calc(100% - 22px);
+    border: 1px solid #3c4459;
+    border-radius: 8px;
+    background-color: #0a0f1d;
+    color: #b0b5d6;
+}
+
+.modal-error {
+    color: red;
+    font-size: 14px;
+    display: none;
+    margin: 0;
+    margin-bottom: -10px;
+}
+
+.modal-submit {
+    padding: 10px 20px;
+    width: 50%;
+    border: none;
+    background: #00e701;
+    color: black;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.modal-submit:hover {
+    background-color: #00d400; /* Slightly darker green for hover */
+    transform: translateY(-3px); /* Slightly elevate the button on hover */
+}
+
+/* Active effect */
+.modal-submit:active {
+    transform: scale(0.98); /* Slightly shrink the button when clicked */
+    background-color: #00c300; /* Darker green for the active state */
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15); /* Reduced shadow on active */
+}
+
+.modal-links {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    text-decoration: underline;
+    font-size: 12px;
+}
+
+.modal-links div {
+    cursor: pointer;
+}
+
+.modal-links div a {
+    color: #fff
+}
+
+.modal-links div a:active {
+    color: #fff
+}
+
+.modal-links div a:hover {
+    color: #fff
+}
+
+.modal-links div a:focus {
+    color: #fff
+}
+
+.social-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 15px 0;
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}
+
+/* Individual social icon styles */
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 40px;
+    text-decoration: none;
+    background: #00e701;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent; 
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
+    color: #fff;
+}
