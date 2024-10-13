@@ -8,6 +8,11 @@ body {
     margin: 0;
 }
 
+img {
+    pointer-events: none;
+    user-select: none;
+}
+
 .game-container {
     text-align: center;
     padding: 10px;

@@ -108,6 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalContent = document.querySelector('.modal-content');
     const submitButton = document.querySelector('.modal-submit');
     const errorMessage = document.querySelector('.modal-error');
+    const inputField = document.getElementById('userIdInput');
+
+    // Prevent clicks inside modal content from bubbling up
+    modalContent.addEventListener('click', function(event) {
+        event.stopPropagation();
+    });
+
+    // Unfocus input when clicking outside modal content
+    modal.addEventListener('click', function(event) {
+        inputField.blur();
+        closeKeyboardOnMobile();
+    });
 
     submitButton.addEventListener('click', submitUserId);
 
